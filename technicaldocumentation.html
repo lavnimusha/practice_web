@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<style>
+  .hilight{
+    background-color: #d6d6d6;
+  }
+  code.transbox {  
+  background-color: #d6d6d6; 
+  margin-right: 100px; 
+  padding: 5px;  
+  opacity: 0.6;
+  filter: alpha(opacity=60); /* For IE8 and earlier */
+}
+div.transbox {  
+  background-color: #d6d6d6; 
+  margin-right: 100px; 
+  padding: 5px;  
+  opacity: 0.6;
+  filter: alpha(opacity=60); /* For IE8 and earlier */
+}
+  </style>
+<body>
+
+<main>
+  <h1>Learning Git</h1>
+  
+
+  <article>
+    <header>Introduction</header>
+    <p>Git is a collection of command line utilities that track and record changes in files (most often source code, but you can track anything you wish). With it you can restore old versions of your project, compare, analyze, merge changes and more. This process is referred to as version control. There are a number of version control systems that do this job. You may have heard some of them - SVN, Mercurial, Perforce, CVS, Bitkeeper and more.</p>
+    <p>Git is decentralized, which means that it doesn't depend on a central server to keep old versions of your files. Instead it works fully locally by storing this data as a folder on your hard drive, which we call a repository. However you can store a copy of your repository online, which makes it easy for multiple people to collaborate and work on the same code. This is what websites like GitHub and BitBucket are used for.</p>
+  </article>
+
+  <article>
+    <header>Local Repository</header>
+    <ol>
+      <li><b>Installing Git</b></li>
+      <p> Installing Git on your machine is straightforward:</p>
+          <ul style="list-style-type:disc">
+            <li>Linux - Simply open up a new terminal and install git via your distribution's package manager. For Ubuntu the command is: <mark class="hilight">sudo apt-get install git</mark></li>
+            <li>Windows - we recommend git for windows as it offers both a GUI client and a BASH comand line emulator.</li>
+            <li>OS X - The easiest way is to install homebrew, and then just run brew install git from your terminal.</li>
+          </ul>
+      <li><b>Configuring GitHub</b></li>
+      <p>Now that we've installed git on our computer, we will need to add some quick configurations. There are a lot of options that can be fiddled with, but we are going to set up the most important ones: our username and email. Open a terminal and run these commands:</p><code class = "transbox">$ git config --global user.name "My Name"<br/>$ git config --global user.email myEmail@example.com</code><br>
+      <li><b>Creating a new repository - <mark class="hilight">git init</mark></b></li>
+      <p>As we mentioned earlier, git stores its files and history directly as a folder in your project. To set up a new repository, we need to open a terminal, navigate to our project directory and run git init. This will enable Git for this particular folder and create a hidden .git directory where the repository history and configuration will be stored.</p><p>Create a folder on your Desktop called git_exercise, open a new terminal and enter the following:<br><code class="transbox">$ cd Desktop/git_exercise/
+      <br>$ git init</code><br>The command line should respond with something along the lines of:<br><br><code class="transbox">Initialized empty Git repository in /home/user/Desktop/git_exercise/.git/</code><br>This means that our repo has been successfully created but is still empty. Now create a simple text file called hello.txt and save it in the git_exercise folder.</p>
+
+      <li><b>Checking the status - <mark class="hilight">git status</mark></b></li>
+      <p>Git status is another must-know command that returns information about the current state of the repository: is everything up to date, what's new, what's changed, and so on. Running git status in our newly created repo should return the following:<br>
+      <code class="transbox">$ git status<br>On branch master<br>Initial commit<br>Untracked files:<br>(use "git add ..." to include in what will be committed)<br>hello.txt</code><br>
+      The returned message states that hello.txt is untracked. This means that the file is new and Git doesn't know yet if it should keep track of the changes happening to that file or just ignore it. To acknowledge the new file, we need to stage it.</p>
+      <li><b>Staging - <mark class="hilight">git add</mark></b></li><p>Git has the concept of a "staging area". You can think of this like a blank canvas, which holds the changes which you would like to commit. It starts out empty, but you can add files to it (or even single lines and parts of files) with the git add command, and finally commit everything (create a snapshot) with git commit.<br>In our case we have only one file so let's add that:<br>$ git add hello.txt<br>If we want to add everything in the directory, we can use:<br><code class="transbox">$ git add -A <br>Checking the status again should return a different response from before.<br>$ git status <br>On branch master <br>Initial commit <br>Changes to be committed: <br>(use "git rm --cached ..." to unstage)<br>new file:   hello.txt<br></code><br>Our file is ready to be commited. The status message also tells us what has changed about the files in the staging area - in this case its new file, but it can be modified or deleted, depending on what has happened to a file since the last git add.</p>
+      <li><b>Commiting - <mark class="hilight">git commit</mark></b></li>
+      <p>A commit represents the state of our repository at a given point in time. It's like a snapshot, which we can go back to and see how thing were when we took it.<br>To create a new commit we need to have at least one change added to the staging area (we just did that with git add) and run the following:<br> <code class="transbox">$ git commit -m "Initial commit."</code> <br>This will create a new commit with all the changes from the staging area (adding hello.txt). The -m "Initial commmit" part is a custom user-written description that summarizes the changes done in that commit. It is considered a good practice to commit often and always write meaningful commit messages.<br></p>
+    
+    </ol>
+  </article>
+<article>
+    <header>Introduction</header>
+    <p>Git is a collection of command line utilities that track and record changes in files (most often source code, but you can track anything you wish). With it you can restore old versions of your project, compare, analyze, merge changes and more. This process is referred to as version control. There are a number of version control systems that do this job. You may have heard some of them - SVN, Mercurial, Perforce, CVS, Bitkeeper and more.</p>
+    <p>Git is decentralized, which means that it doesn't depend on a central server to keep old versions of your files. Instead it works fully locally by storing this data as a folder on your hard drive, which we call a repository. However you can store a copy of your repository online, which makes it easy for multiple people to collaborate and work on the same code. This is what websites like GitHub and BitBucket are used for.</p>
+  </article>
+
+  <article>
+    <header>Remote Repository</header>
+    <p>Right now our commit is local - it exist only in the .git folder. Although a local repository is useful by itself, in most cases we will want to share our work and deploy it to a server or a repository hosting service</p>
+    <ol>
+      <li><b>Connecting to a remote repository - <mark class="hilight">git remote add</mark></b></li>
+      <p>n order to upload something to a remote repo, we first have to establish a connection with it. For the sake of this tutorial our repository's address will be https://github.com/tutorialzine/awesome-project. We advise you to go ahead and create your own empty repository at GitHub, BitBucket or any other service. The registration and setup may take a while, but all services offer good step-by-step guides to help you.<br>To link our local repository with the one on GitHub, we execute the following line in the terminal:<br> <code class="transbox"># This is only an example. Replace the URI with your own repository address.<br>
+$ git remote add origin https://github.com/tutorialzine/awesome-project.git</code>A project may have many remote repositories at the same time. To be able to tell them apart we give them different names. Traditionally the main remote repository in git is called <em>origin</em>.</p>  
+      <li><b>Uploading to a server - <mark class="transbox">git push</mark></b></li>
+      <p>Now it's time to transfer our local commits to the server. This process is called a push, and is done every time we want to update the remote repository. <br>The Git command to do this is git push and takes two parameters - the name of the remote repo (we called ours origin) and the branch to push to (master is the default branch for every repo). <br> <code class="transbox">$ git push origin master<br>Counting objects: 3, done. <br>Writing objects: 100% (3/3), 212 bytes | 0 bytes/s, done. <br>Total 3 (delta 0), reused 0 (delta 0) <br> To https://github.com/tutorialzine/awesome-project.git <br>* [new branch]      master -> master
+      </code>Depending on the service you're using, you will need to authenticate yourself for the push to go through. If everything was done correctly, when you go in your web browser to the remote repository created earlier, hello.txt should be available there.</p>
+
+      <li><b>Cloning a repository -  <mark class="hilight">git clone</mark></b></li>
+      <p>At this point, people can see and browse through your remote repository on Github. They can download it locally and have a fully working copy of your project with the <mark class="hilight">git clone</mark> command: <code class="transbox"> $ git clone https://github.com/tutorialzine/awesome-project.git</code> <br>A new local respository is automatically created, with the github version configured as a remote.
+      </p>
+      <li><b>Getting changes from a server - <mark class="hilight">git pull</mark></b></li><p>If you make updates to your repository, people can download your changes with a single command - pull: <br> <code class="transbox">$ git pull origin master <br>From https://github.com/tutorialzine/awesome-project <br>* branch            master     -> FETCH_HEAD <br>Already up-to-date. <br></code>Since nobody else has commited since we cloned, there weren't any changes to download.
+</p>
+    </ol>
+  </article>
+  <article>
+    <header>Branches</header>
+    <p>When developing a new feature, it is considered a good practice to work on a copy of the original project, called a branch. Branches have their own history and isolate their changes from one another, until you decide to merge them back together. This is done for a couple of reasons: <br>
+<ul style="list-style-type:disc">
+  <li>An already working, stable version of the code won't be broken.</li>
+  <li>Many features can be safely developed at once by different people.</li>
+  <li>Developers can work on their own branch, without the risk of their codebase changing due to someone else's work.</li>
+   <li>When unsure what's best, multiple versions of the same feature can be developed on separate branches and then compared.</li>
+</ul>
+  </p>
+    <ol>
+    
+      <li><b>Creating new branches - <mark class="hilight">git branch</mark></b></li>
+      <p>The default branch of every repository is called master. To create additional branches use the git branch <name> command: <br>
+<code class="transbox">$ git branch amazing_new_feature</code> <br> This just creates the new branch, which at this point is exactly the same as our master.
+</p>
+
+      <li><b>Switching branches - <mark class="hilight">git checkout</mark></b></li>
+      <p>Now, when we run git branch, we will see there are two options available: <br> <code class="transbox">$ git branch <br>amazing_new_feature <br>* master</code>Master is the current branch and is marked with an asterisk. However, we want to work on our new amazing features, so we need to switch to the other branch. This is done with the git checkout command, expecting one parameter - the branch to switch to. <code class="transbox">$ git checkout amazing_new_feature</code></p>
+
+      <li><b>Merging branches - <mark class="hilight">git merge</mark></b></li><p>Our "amazing new feature" is going to be just another text file called feature.txt. We will create it, add it, and commit it. <br>
+ <div class="transbox">
+   <code>$ git add feature.txt <br>$ git commit -m "New feature complete." </code></div>  <br>The new feature is complete, we can go back to the master branch. <br><div class="transbox"><code>$ git checkout master</code></div> 
+ </div><br>Now, if we open our project in the file browser, we'll notice that feature.txt has disappeared. That's because we are back in the master branch, and here feature.txt was never created. To bring it in, we need to git merge the two branches together, applying the changes done in amazing_new_feature to the main version of the project.<br><br><div class="transbox"><code>$git merge amazing_new_feature</code></div><br>The master branch is now up to date. The awesome_new_feature branch is no longer needed and can be removed. <br><br>
+<div class="transbox"><code>$git branch -d amazing_new_feature</code></div><br>
+</p>
+    
+    </ol>
+  </article>
+</main>
+</body>
+</html>
+
